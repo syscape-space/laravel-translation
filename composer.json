@@ -1,0 +1,59 @@
+{
+    "name": "syscape-space/laravel-translation",
+    "description": "A Laravel package for model attributes translations",
+    "keywords": [
+        "syscape-space",
+        "laravel-translation"
+    ],
+    "homepage": "https://github.com/syscape-space/laravel-translation",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ahmed Almory",
+            "email": "ahmedalmory02@gmail.com",
+            "role": "Backend Engineer"
+        },
+        {
+            "name": "Ahmed Tofaha",
+            "email": "ahmedtofaha999@gmail.com",
+            "role": "Web Developer & Data Scientist"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0|^9.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SyscapeSpace\\LaravelTranslation\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SyscapeSpace\\LaravelTranslation\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SyscapeSpace\\LaravelTranslation\\LaravelTranslationServiceProvider"
+            ],
+            "aliases": {
+                "LaravelTranslation": "SyscapeSpace\\LaravelTranslation\\LaravelTranslationFacade"
+            }
+        }
+    }
+}
