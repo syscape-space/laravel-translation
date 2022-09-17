@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use SyscapeSpace\LaravelTranslation\Translation;
 
-trait hasTranslation
+trait HasTranslation
 {
 
     public function __construct(array $attributes = [])
@@ -40,7 +40,7 @@ trait hasTranslation
         $translations = $this->getTranslations();
         $saved = true;
         foreach ($translations as $attribute => $value) {
-            $saved = $saved && $this->setTranslationAttribute($attribute, $value);
+            $this->setTranslation($attribute, $value);
         }
         return $saved;
     }
@@ -73,7 +73,7 @@ trait hasTranslation
         return $this->translationAttributes ?? [];
     }
 
-    public function setTranslationAttribute($attribute, $value, $locale = null)
+    public function setTranslation($attribute, $value, $locale = null)
     {
         $locale = $locale ?? app()->getLocale();
         $this->translations()->updateOrCreate([

@@ -25,8 +25,7 @@ use SyscapeSpace\LaravelTranslation\Traits\hasTranslation;
 
 class Post extends Model
 {
-    use HasFactory, hasTranslation;
-
+    use HasFactory, HasTranslation;
     protected $fillable = [
         'title',
         'body',
