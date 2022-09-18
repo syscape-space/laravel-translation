@@ -171,7 +171,6 @@ trait HasTranslation
         }else{
             $locale = app()->getLocale();
         }
-        dd($key);
         if (in_array($key, $this->translationAttributes)) {
             $this->setTranslation($key, $value,$locale);
             return 1;
