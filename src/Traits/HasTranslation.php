@@ -9,7 +9,6 @@ use SyscapeSpace\LaravelTranslation\Translation;
 
 trait HasTranslation
 {
-
 //    public function __construct(array $attributes = [])
 //    {
 //        parent::__construct($attributes);
@@ -172,6 +171,7 @@ trait HasTranslation
         }else{
             $locale = app()->getLocale();
         }
+        dd($key);
         if (in_array($key, $this->translationAttributes)) {
             $this->setTranslation($key, $value,$locale);
             return 1;

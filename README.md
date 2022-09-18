@@ -26,10 +26,15 @@ use SyscapeSpace\LaravelTranslation\Traits\hasTranslation;
 class Post extends Model
 {
     use HasFactory, HasTranslation;
+    // to force laravel accept the translation attributes
+    protected $guarded = [];
+    #or if you have time
+    protected $fillable = ['title','title_en','title_ar','content','content_en','content_ar'];
+    //-------------------------------------------------
     // just like that without any migration or configuration
     public $translationAttributes = [
         'title',
-        'body',
+        'content',
     ];
 
 }
@@ -39,14 +44,14 @@ class Post extends Model
 // depending on the current locale
 $post = Post::create([
 'title' => 'title',
-'body' => 'body',
+'body' => 'content',
 ]);
 #or
 $post = Post::create([
 'title_ar' => 'عنوان',
 'title_en' => 'title',
 'body_ar' => 'محتوى',
-'body_en' => 'body',
+'body_en' => 'content',
 ]);
 # and 
 $post->title; // title 
