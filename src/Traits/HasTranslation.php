@@ -110,26 +110,14 @@ trait HasTranslation
         return $this->translationAttributes ?? [];
     }
 
-    private function getTranslation($attribute)
+    private function getTranslation($attribute, $locale)
     {
-        if ($this->checkIfAttributeContainsLocale($attribute)) {
-            $locale = $this->getLocaleFromAttribute($attribute);
-            $attribute = $this->getAttributeWithoutLocale($attribute);
-        }else{
-            $locale = app()->getLocale();
-        }
         $translation = $this->translations()->where('locale', $locale)->where('attribute', $attribute)->first();
         return $translation->value ?? null;
     }
 
-    public function setTranslation($attribute, $value)
+    public function setTranslation($attribute, $value,$locale)
     {
-        if ($this->checkIfAttributeContainsLocale($attribute)) {
-            $locale = $this->getLocaleFromAttribute($attribute);
-            $attribute = $this->getAttributeWithoutLocale($attribute);
-        }else{
-            $locale = app()->getLocale();
-        }
         $this->id = $this->id ?? $this->getNextId();
         $this->translations()->updateOrCreate([
             'locale' => $locale,
@@ -163,8 +151,14 @@ trait HasTranslation
 
     public function getAttribute($key)
     {
+        if ($this->checkIfAttributeContainsLocale($key)) {
+            $locale = $this->getLocaleFromAttribute($key);
+            $key = $this->getAttributeWithoutLocale($key);
+        }else{
+            $locale = app()->getLocale();
+        }
         if (in_array($key, $this->translationAttributes)) {
-            return $this->getTranslation($key);
+            return $this->getTranslation($key,$locale);
         }
         $attribute = parent::getAttribute($key);
         return $attribute;
@@ -172,8 +166,14 @@ trait HasTranslation
 
     public function setAttribute($key, $value)
     {
+        if ($this->checkIfAttributeContainsLocale($key)) {
+            $locale = $this->getLocaleFromAttribute($key);
+            $key = $this->getAttributeWithoutLocale($key);
+        }else{
+            $locale = app()->getLocale();
+        }
         if (in_array($key, $this->translationAttributes)) {
-            $this->setTranslation($key, $value);
+            $this->setTranslation($key, $value,$locale);
             return 1;
         }
         return parent::setAttribute($key, $value);
