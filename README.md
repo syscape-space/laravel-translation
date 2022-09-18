@@ -9,7 +9,7 @@ A Laravel package for model attributes translations
 
 You can install the package via composer:
 
-1. `composer require anlutro/l4-settings`
+1. `composer require syscape-space/laravel-translation`
 2. publish the migration to create the media table by running `php artisan vendor:publish --provider="SyscapeSpace\LaravelTranslation\LaravelTranslationServiceProvider" --tag="migrations"`.
 
 ## Usage
