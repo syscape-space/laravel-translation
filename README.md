@@ -26,34 +26,34 @@ use SyscapeSpace\LaravelTranslation\Traits\hasTranslation;
 class Post extends Model
 {
     use HasFactory, HasTranslation;
-    protected $fillable = [
-        'title',
-        'body',
-    ];
-
+    // just like that without any migration or configuration
     public $translationAttributes = [
         'title',
         'body',
     ];
 
-    public function getTitleAttribute($value)
-    {
-        // locale is optional, if not set the current locale will be used
-        $locale = 'en';
-        // return the translated value
-        return $this->getTranslation('title',$locale);
-    }
-
-    public function getBodyAttribute($value)
-    {
-        // locale is optional, if not set the current locale will be used
-        $locale = 'en';
-        // return the translated value
-        return $this->getTranslation('body',$locale);
-    }
-
 }
 ```
+```php
+#any where in your code
+// depending on the current locale
+$post = Post::create([
+'title' => 'title',
+'body' => 'body',
+]);
+#or
+$post = Post::create([
+'title_ar' => 'عنوان',
+'title_en' => 'title',
+'body_ar' => 'محتوى',
+'body_en' => 'body',
+]);
+# and 
+$post->title; // title 
+#or 
+$post->title_ar; // عنوان
+```
+
 
 ### Testing
 
