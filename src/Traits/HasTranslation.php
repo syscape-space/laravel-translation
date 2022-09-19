@@ -150,6 +150,7 @@ trait HasTranslation
 
     public function getAttribute($key)
     {
+        $originalKey = $key;
         if ($this->checkIfAttributeContainsLocale($key)) {
             $locale = $this->getLocaleFromAttribute($key);
             $key = $this->getAttributeWithoutLocale($key);
@@ -159,12 +160,12 @@ trait HasTranslation
         if (in_array($key, $this->translationAttributes)) {
             return $this->getTranslation($key,$locale);
         }
-        $attribute = parent::getAttribute($key);
-        return $attribute;
+        return parent::getAttribute($originalKey);
     }
 
     public function setAttribute($key, $value)
     {
+        $originalKey = $key;
         if ($this->checkIfAttributeContainsLocale($key)) {
             $locale = $this->getLocaleFromAttribute($key);
             $key = $this->getAttributeWithoutLocale($key);
@@ -173,9 +174,9 @@ trait HasTranslation
         }
         if (in_array($key, $this->translationAttributes)) {
             $this->setTranslation($key, $value,$locale);
-            return 1;
+            return $this;
         }
-        return parent::setAttribute($key, $value);
+        return parent::setAttribute($originalKey, $value);
     }
 
 
